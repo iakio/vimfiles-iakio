@@ -3,9 +3,17 @@ scriptencoding utf-8
 set nocompatible
 filetype off
 
+let s:is_win = has('win32') || has('win64')
+
+if s:is_win
+	let $MYVIMDIR = expand('~/vimfiles')
+else
+	let $MYVIMDIR = expand('~/.vim')
+endif
+
 if has('vim_starting')
-	set runtimepath +=~/.vim/bundle/neobundle.vim/
-	call neobundle#rc(expand('~/.vim/bundle'))
+	set runtimepath +=$MYVIMDIR/bundle/neobundle.vim/
+	call neobundle#rc(expand('$MYVIMDIR/bundle'))
 endif
 
 "NeoBundle 'tyru/current-func-info.vim'
@@ -25,6 +33,13 @@ let mapleader = " "
 
 if filereadable('.vimrc.local')
 	execute 'source .vimrc.local'
+endif
+
+set encoding=japan
+if s:is_win
+	set fileencodings=euc-jp,utf-8
+else
+	set fileencodings=euc-jp,cp932
 endif
 
 set ambiwidth=double
