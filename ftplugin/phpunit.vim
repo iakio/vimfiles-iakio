@@ -9,6 +9,7 @@ setlocal errorformat=
 			\%-GTime:\ %\\d%.%#,
 			\%-GThere\ was\ %\\d%\\+\ failure:,
 			\%-G%[.EFI]%#,
+			\%-GConfiguration\ read\ from%.%#,
 			\%E%\\d%\\+)\ %.%#,
 			\%Z%f:%l,
 			\%[.EFI]%#PHP\ %.%#\ %trror:%m\ in\ %f\ on\ line\ %l,
