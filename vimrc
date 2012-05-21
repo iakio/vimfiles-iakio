@@ -17,12 +17,12 @@ if has('vim_starting')
 endif
 
 "NeoBundle 'tyru/current-func-info.vim'
-"NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'kien/ctrlp.vim'
 "NeoBundle 'jceb/vim-hier'
 "NeoBundle 'kana/vim-smartchr'
 "NeoBundle 'kchmck/vim-coffee-script'
 "NeoBundle 'thinca/vim-quickrun'
-"NeoBundle 'mattn/sonictemplate-vim'
+NeoBundle 'mattn/sonictemplate-vim'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'vim-scripts/desert256.vim'
 NeoBundle 'iakio/vimfiles-iakio'
@@ -35,19 +35,21 @@ if filereadable('.vimrc.local')
 	execute 'source .vimrc.local'
 endif
 
-set encoding=japan
 if s:is_win
+	set encoding=japan
 	set fileencodings=euc-jp,utf-8
 else
-	set fileencodings=euc-jp,cp932
+	set encoding=utf-8
 endif
 
 set ambiwidth=double
+set backspace=indent,eol,start
 set textwidth=0
 set tabstop=4
 set shiftwidth=4
 set noexpandtab
 set fileformats=unix,dos
+set fileformat=unix
 set laststatus=2
 set hidden
 set showcmd
@@ -59,6 +61,14 @@ set wildmenu
 
 if has("gui_running")
 	set gfn=Migu_1M:h10:cSHIFTJIS
+
+	autocmd ColorScheme *
+				\   highlight link Tab Folded
+				\ | highlight link Trails Error
+
+	autocmd Syntax * syntax match Tab containedin=ALL "\t"
+	autocmd Syntax * syntax match Trails containedin=ALL "\s\+$"
+
 	colorscheme desert
 else
 	set t_Co=256
@@ -93,7 +103,17 @@ nmap <Leader>v :<C-u>make %<CR>
 nmap + <C-w>+
 nmap - <C-w>-
 nnoremap <C-l> :<C-u>nohls<CR><C-l>
-imap <C-u> <Nop>
+
+imap Z{ {<CR>}<C-O>O
+imap Z} {<CR>};<C-O>O
+imap Z( ()<Left>
+imap z[ []<Left>
+imap Z' ''<Left>
+imap z" ""<Left>
+
+imap jj <Esc>
+imap ;; ;<Esc>
+imap <C-u> <Esc>
 imap <C-l> <Esc>
 cmap <C-l> <Esc>
 vmap <C-l> <Esc>
@@ -134,20 +154,28 @@ augroup END
 "
 " default plugin
 "
-if !has('win32') && !has('win64')
+if !s:is_win
 	runtime ftplugin/man.vim
 endif
 runtime macros/matchit.vim
 
+"
+" ChangeLog
+" 
+let g:changelog_username = "ISHIDA Akio"
 
 "
 " ctrl-p
 "
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*   " for Linux/MacOSX
-let g:ctrlp_dotfiles = 0
 let g:ctrlp_map = '<Leader>p'
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-let g:ctrlp_clear_cache_on_exit = 0
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*   " for Linux/MacOSX
+
+
+"
+" sonictemplate
+"
+let g:sonictemplate_vim_template_dir = expand('~/vimfiles/bundle/vimfiles-iakio/template')
+
 
 
 if has('cscope')
