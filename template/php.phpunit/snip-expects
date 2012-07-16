@@ -1,0 +1,4 @@
+$mock->expects($this->once())
+	->method('{{_cursor_}}')
+	->with()
+	->will($this->returnValue())
