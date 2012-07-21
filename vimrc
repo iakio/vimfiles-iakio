@@ -47,7 +47,7 @@ set backspace=indent,eol,start
 set textwidth=0
 set tabstop=4
 set shiftwidth=4
-set noexpandtab
+set expandtab
 set fileformats=unix,dos
 set fileformat=unix
 set laststatus=2
@@ -161,7 +161,7 @@ runtime macros/matchit.vim
 
 "
 " ChangeLog
-" 
+"
 let g:changelog_username = "ISHIDA Akio"
 
 "
@@ -174,7 +174,7 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*   " for Linux/MacOSX
 "
 " sonictemplate
 "
-let g:sonictemplate_vim_template_dir = expand('~/vimfiles/bundle/vimfiles-iakio/template')
+let g:sonictemplate_vim_template_dir = expand('$MYVIMDIR/bundle/vimfiles-iakio/template')
 
 
 
