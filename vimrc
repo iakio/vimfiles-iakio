@@ -107,6 +107,7 @@ nnoremap <C-l> :<C-u>nohls<CR><C-l>
 imap Z{ {<CR>}<C-O>O
 imap Z} {<CR>};<C-O>O
 imap Z( ()<Left>
+imap Z) ();<Left><Left>
 imap z[ []<Left>
 imap Z' ''<Left>
 imap z" ""<Left>
