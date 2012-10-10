@@ -113,6 +113,8 @@ imap Z' ''<Left>
 imap z" ""<Left>
 
 imap jj <Esc>
+imap jJ <Esc>
+imap Jj <Esc>
 imap ;; ;<Esc>
 imap <C-u> <Esc>
 imap <C-l> <Esc>
@@ -148,6 +150,7 @@ augroup MyGroup
 	autocmd FileType python setlocal softtabstop=4 expandtab
 	autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab
 	autocmd FileType xhtml setlocal shiftwidth=2 softtabstop=2 expandtab
+	autocmd BufNewFile *.php setlocal fileencoding=utf-8
 	autocmd BufWritePost $MYVIMRC source %
 augroup END
 
