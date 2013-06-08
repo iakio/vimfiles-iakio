@@ -20,15 +20,23 @@ endif
 NeoBundle 'kien/ctrlp.vim'
 "NeoBundle 'jceb/vim-hier'
 "NeoBundle 'kana/vim-smartchr'
-"NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'kchmck/vim-coffee-script'
 "NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'mattn/sonictemplate-vim'
 NeoBundle 'vim-jp/vimdoc-ja'
 NeoBundle 'vim-scripts/desert256.vim'
+NeoBundle 'jdonaldson/vaxe'
+NeoBundle 'tsaleh/vim-align'
+NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'iakio/vimfiles-iakio'
 
-syntax on
+if $GOROOT != ''
+    set rtp+=$GOROOT/misc/vim
+    set rtp+=$MYVIMDIR/gocode/vim
+endif
+
 filetype plugin indent on
+syntax on
 let mapleader = " "
 
 if filereadable('.vimrc.local')
@@ -111,11 +119,13 @@ imap Z) ();<Left><Left>
 imap z[ []<Left>
 imap Z' ''<Left>
 imap z" ""<Left>
+inoremap zz z
+inoremap ZZ Z
 
-imap jj <Esc>
-imap jJ <Esc>
-imap Jj <Esc>
-imap ;; ;<Esc>
+"imap jj <Esc>
+"imap jJ <Esc>
+"imap Jj <Esc>
+"imap ;; ;<Esc>
 imap <C-u> <Esc>
 imap <C-l> <Esc>
 cmap <C-l> <Esc>
@@ -182,7 +192,7 @@ let g:sonictemplate_vim_template_dir = expand('$MYVIMDIR/bundle/vimfiles-iakio/t
 
 
 
-if has('cscope')
+if has('cscope') && executable('cscope')
 
 	nnoremap <Leader>cs :<C-u>scs find s <C-R>=expand("<cword>")<CR><CR>
 	nnoremap <Leader>cg :<C-u>scs find g <C-R>=expand("<cword>")<CR><CR>
