@@ -28,6 +28,7 @@ NeoBundle 'vim-scripts/desert256.vim'
 NeoBundle 'jdonaldson/vaxe'
 NeoBundle 'tsaleh/vim-align'
 NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'Blackrush/vim-gocode'
 NeoBundle 'iakio/vimfiles-iakio'
 
 if $GOROOT != ''
@@ -149,6 +150,12 @@ function! s:au_lazzy()
 endfunction
 
 
+function! s:try_utf8()
+    if search("[^\x00-\x7f]", "nw") == 0
+        setlocal fileencoding=utf-8
+    endif
+endfunction
+
 
 "
 " autocmd
@@ -160,7 +167,7 @@ augroup MyGroup
 	autocmd FileType python setlocal softtabstop=4 expandtab
 	autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab
 	autocmd FileType xhtml setlocal shiftwidth=2 softtabstop=2 expandtab
-	autocmd BufNewFile *.php setlocal fileencoding=utf-8
+	autocmd BufNewFile,BufRead * call s:try_utf8()
 	autocmd BufWritePost $MYVIMRC source %
 augroup END
 
